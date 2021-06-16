@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -17,14 +18,19 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.nex2you.api.exception.ItemNotFoundException;
 import br.com.nex2you.api.model.Item;
 import br.com.nex2you.api.response.Response;
 import br.com.nex2you.api.service.ItemService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 
 @RestController
+@RequestMapping("api")
+@Api(value = "Crud")
 public class ItemController {
 
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -32,6 +38,7 @@ public class ItemController {
 	@Autowired
 	private ItemService itemService;
 
+	@ApiOperation(value = "Inclusão de itens")
 	@PostMapping
 	public ResponseEntity<Response<Item>> create(HttpServletRequest request, @RequestBody Item item,
 			BindingResult result) {
@@ -52,6 +59,7 @@ public class ItemController {
 		return ResponseEntity.ok(response);
 	}
 
+	@ApiOperation(value = "Atualização de itens")
 	@PutMapping(value = "{id}")
 	public ResponseEntity<Response<Item>> update(HttpServletRequest request, @RequestBody Item item,
 			BindingResult result, @PathVariable String id) {
@@ -71,6 +79,7 @@ public class ItemController {
 		return ResponseEntity.ok(response);
 	}
 
+	@ApiOperation(value = "Consulta de itens por id")
 	@GetMapping(value = "{id}")
 	public ResponseEntity<Response<Item>> findById(@PathVariable String id) {
 		Response<Item> response = new Response<>();
@@ -90,6 +99,7 @@ public class ItemController {
 		return ResponseEntity.ok(response);
 	}
 
+	@ApiOperation(value = "Lista de itens")
 	@GetMapping
 	public ResponseEntity<Response<List<Item>>> findAll() {
 		logger.info("[{}][findAll]", this.getClass().getName());
@@ -101,6 +111,7 @@ public class ItemController {
 		return ResponseEntity.ok(response);
 	}
 
+	@ApiOperation(value = "Exclusão de itens por id")
 	@DeleteMapping(value = "{id}")
 	public ResponseEntity<Response<String>> delete(@PathVariable String id) {
 		Response<String> response = new Response<>();
