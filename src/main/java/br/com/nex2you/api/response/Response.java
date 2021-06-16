@@ -3,10 +3,14 @@ package br.com.nex2you.api.response;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.swagger.annotations.ApiModelProperty;
+
 public class Response<T> {
 
+	@ApiModelProperty(notes = "Dado a ser retornado")
 	private T data;
 
+	@ApiModelProperty(notes = "Lista de erros encontrados")
 	private List<String> errors;
 
 	public T getData() {

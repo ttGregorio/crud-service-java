@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -24,9 +25,12 @@ public class Item implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@EqualsAndHashCode.Include
+	@ApiModelProperty(notes = "Id do item")
 	private String id;
 
+	@ApiModelProperty(notes = "Nome do item", required = true)
 	private String name;
 
+	@ApiModelProperty(notes = "Flag indicando se o item está ativo")
 	private boolean active;
 }
