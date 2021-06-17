@@ -10,12 +10,13 @@ pipeline {
 		mavenHome = tool 'myMaven'
 		PATH = "$dockerHome/bin:$mavenHome/bin:$PATH"
 	}
-	stage('Initialize'){
-        def dockerHome = tool 'myDocker'
-        env.PATH = "${dockerHome}/bin:${env.PATH}"
-    }
 
 	stages {
+		stage('Initialize'){
+	        def dockerHome = tool 'myDocker'
+	        env.PATH = "${dockerHome}/bin:${env.PATH}"
+	    }
+	
 		stage('Checkout') {
 			steps {
 				sh 'mvn --version'
