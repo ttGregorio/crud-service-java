@@ -43,3 +43,11 @@ sudo systemctl daemon-reload
 sudo systemctl start jenkins
 <br>
 sudo systemctl status jenkins
+
+5 - Adicione no Jenkins os plugins de Docker e Docker pipeline acessando Gerenciar Jenkins, Gerenciar Plugins, Disponíveis
+
+6 - Configure as credenciais globais em Gerenciar Jenkins, Manage Credentials, clique em Jenkins, Global Credentials, e adicione uma nova credencial de nome dockerhub, com seu usuário e senha do docker hub
+
+7 - Acesse Global Tool Configuration, clique em maven, adicione uma configuração auto instalada myMaven. faça o mesmo procedimento para Docker, com usuário myDocker
+
+8 - Crie uma nova pipeline, apontando em General, Pipeline from SCM, SCM Git, apontando para este repositório
