@@ -2,8 +2,6 @@ package br.com.nex2you.api.model;
 
 import java.io.Serializable;
 
-import javax.validation.constraints.NotEmpty;
-
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import io.swagger.annotations.ApiModelProperty;
@@ -31,7 +29,7 @@ public class Item implements Serializable {
 	private String id;
 
 	@ApiModelProperty(notes = "Nome do item", required = true)
-	@NotEmpty
+//	@NotEmpty
 	private String name;
 
 	@ApiModelProperty(notes = "Flag indicando se o item está ativo")
