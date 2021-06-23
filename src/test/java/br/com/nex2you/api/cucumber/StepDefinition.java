@@ -1,5 +1,5 @@
 package br.com.nex2you.api.cucumber;
-/*
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.net.URI;
@@ -106,4 +106,3 @@ public class StepDefinition {
 	}
 
 }
-*/
