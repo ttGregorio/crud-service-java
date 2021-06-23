@@ -60,35 +60,35 @@ public class StepDefinition {
 
 	@When("^executar o post para o servico$")
 	public void executar_o_post_para_o_servico() throws Exception {
-		this.response = this.testRestTemplate.postForEntity(new URI(postUrl.concat(Integer.toString(port))), this.item,
-				Response.class);
+		this.response = this.testRestTemplate.postForEntity(
+				new URI(postUrl.concat(Integer.toString(port)).concat("/api")), this.item, Response.class);
 	}
 
 	@When("^executar o put para o servico$")
 	public void executar_o_put_para_o_servico() throws Exception {
 		this.response = this.testRestTemplate.exchange(
-				postUrl.concat(Integer.toString(port)).concat("/api").concat(headerId), HttpMethod.PUT,
+				postUrl.concat(Integer.toString(port)).concat("/api/").concat(headerId), HttpMethod.PUT,
 				new HttpEntity<Item>(this.item), Response.class);
 	}
 
 	@When("^executar o get por id para o servico$")
 	public void executar_o_get_por_id_para_o_servico() throws Exception {
 		this.response = this.testRestTemplate.exchange(
-				postUrl.concat(Integer.toString(port)).concat("/api").concat(headerId), HttpMethod.GET, null,
+				postUrl.concat(Integer.toString(port)).concat("/api/").concat(headerId), HttpMethod.GET, null,
 				Item.class);
 	}
 
 	@When("^executar o delete para o servico$")
 	public void executar_o_delete_para_o_servico() throws Exception {
 		this.response = this.testRestTemplate.exchange(
-				postUrl.concat(Integer.toString(port)).concat("/api").concat(headerId), HttpMethod.DELETE, null,
+				postUrl.concat(Integer.toString(port)).concat("/api/").concat(headerId), HttpMethod.DELETE, null,
 				Response.class);
 	}
 
 	@When("executar o get para o servico")
 	public void executar_o_get_para_o_servico() throws Exception {
-		this.response = this.testRestTemplate.exchange(postUrl.concat(Integer.toString(port)), HttpMethod.GET, null,
-				Response.class);
+		this.response = this.testRestTemplate.exchange(postUrl.concat(Integer.toString(port)).concat("/api"),
+				HttpMethod.GET, null, Response.class);
 	}
 
 	@Then("^Deve retornar o status (\\d+) na requisicao$")

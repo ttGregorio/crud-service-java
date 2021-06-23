@@ -108,7 +108,7 @@ public class ItemControllerTest {
 		headers.add("Authorization", "123123123");
 		try {
 			MvcResult result = this.mockMvc
-					.perform(put("/apiid").headers(headers).content(new Gson().toJson(getItemCreated()))
+					.perform(put("/api/id").headers(headers).content(new Gson().toJson(getItemCreated()))
 							.contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON))
 					.andExpect(status().isOk()).andReturn();
 			assertNotNull(result.getResponse());
@@ -124,7 +124,7 @@ public class ItemControllerTest {
 		headers.add("Authorization", "123123123");
 		try {
 			this.mockMvc
-					.perform(put("/apiid").headers(headers).content(new Gson().toJson(getItemToCreate(false)))
+					.perform(put("/api/id").headers(headers).content(new Gson().toJson(getItemToCreate(false)))
 							.contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON))
 					.andExpect(status().isBadRequest()).andReturn();
 		} catch (Exception e) {
@@ -139,7 +139,7 @@ public class ItemControllerTest {
 		headers.add("Authorization", "123123123");
 		try {
 			this.mockMvc
-					.perform(put("/apiid2").headers(headers).content(new Gson().toJson(getItemCreated()))
+					.perform(put("/api/id2").headers(headers).content(new Gson().toJson(getItemCreated()))
 							.contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON))
 					.andExpect(status().isBadRequest()).andReturn();
 		} catch (Exception e) {
@@ -154,7 +154,7 @@ public class ItemControllerTest {
 		headers.add("Authorization", "123123123");
 		try {
 			this.mockMvc
-					.perform(put("/apiid").headers(headers).content(new Gson().toJson(getItemToCreate(false)))
+					.perform(put("/api/id").headers(headers).content(new Gson().toJson(getItemToCreate(false)))
 							.contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON))
 					.andExpect(status().isBadRequest()).andReturn();
 		} catch (Exception e) {
@@ -168,7 +168,7 @@ public class ItemControllerTest {
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("Authorization", "123123123");
 		try {
-			MvcResult result = this.mockMvc.perform(get("/apiid").headers(headers).contentType(MediaType.APPLICATION_JSON)
+			MvcResult result = this.mockMvc.perform(get("/api/id").headers(headers).contentType(MediaType.APPLICATION_JSON)
 					.accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk()).andReturn();
 			assertNotNull(result.getResponse());
 		} catch (Exception e) {
@@ -182,7 +182,7 @@ public class ItemControllerTest {
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("Authorization", "123123123");
 		try {
-			MvcResult result = this.mockMvc.perform(get("/apiid2").headers(headers).contentType(MediaType.APPLICATION_JSON)
+			MvcResult result = this.mockMvc.perform(get("/api/id2").headers(headers).contentType(MediaType.APPLICATION_JSON)
 					.accept(MediaType.APPLICATION_JSON)).andExpect(status().isBadRequest()).andReturn();
 			assertNotNull(result.getResponse());
 		} catch (Exception e) {
@@ -210,7 +210,7 @@ public class ItemControllerTest {
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("Authorization", "123123123");
 		try {
-			MvcResult result = this.mockMvc.perform(delete("/apiid").headers(headers)
+			MvcResult result = this.mockMvc.perform(delete("/api/id").headers(headers)
 					.contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON))
 					.andExpect(status().isOk()).andReturn();
 			assertNotNull(result.getResponse());
@@ -225,7 +225,7 @@ public class ItemControllerTest {
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("Authorization", "123123123");
 		try {
-			MvcResult result = this.mockMvc.perform(delete("/apiid2").headers(headers)
+			MvcResult result = this.mockMvc.perform(delete("/api/id2").headers(headers)
 					.contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON))
 					.andExpect(status().isBadRequest()).andReturn();
 			assertNotNull(result.getResponse());
