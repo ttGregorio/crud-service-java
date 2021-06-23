@@ -67,20 +67,21 @@ public class StepDefinition {
 	@When("^executar o put para o servico$")
 	public void executar_o_put_para_o_servico() throws Exception {
 		this.response = this.testRestTemplate.exchange(
-				postUrl.concat(Integer.toString(port)).concat("/").concat(headerId), HttpMethod.PUT,
+				postUrl.concat(Integer.toString(port)).concat("/api").concat(headerId), HttpMethod.PUT,
 				new HttpEntity<Item>(this.item), Response.class);
 	}
 
 	@When("^executar o get por id para o servico$")
 	public void executar_o_get_por_id_para_o_servico() throws Exception {
 		this.response = this.testRestTemplate.exchange(
-				postUrl.concat(Integer.toString(port)).concat("/").concat(headerId), HttpMethod.GET, null, Item.class);
+				postUrl.concat(Integer.toString(port)).concat("/api").concat(headerId), HttpMethod.GET, null,
+				Item.class);
 	}
 
 	@When("^executar o delete para o servico$")
 	public void executar_o_delete_para_o_servico() throws Exception {
 		this.response = this.testRestTemplate.exchange(
-				postUrl.concat(Integer.toString(port)).concat("/").concat(headerId), HttpMethod.DELETE, null,
+				postUrl.concat(Integer.toString(port)).concat("/api").concat(headerId), HttpMethod.DELETE, null,
 				Response.class);
 	}
 

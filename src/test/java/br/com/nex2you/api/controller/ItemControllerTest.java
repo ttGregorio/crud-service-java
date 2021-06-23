@@ -21,7 +21,6 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -61,7 +60,7 @@ public class ItemControllerTest {
 		headers.add("Authorization", "123123123");
 		try {
 			MvcResult result = this.mockMvc
-					.perform(post("/").headers(headers).content(new Gson().toJson(getItemToCreate(true)))
+					.perform(post("/api").headers(headers).content(new Gson().toJson(getItemToCreate(true)))
 							.contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON))
 					.andExpect(status().isOk()).andReturn();
 			assertNotNull(result.getResponse());
@@ -78,7 +77,7 @@ public class ItemControllerTest {
 		try {
 			MvcResult result = this.mockMvc
 					.perform(
-							post("/").headers(headers).content(new Gson().toJson(Item.builder().name("item 2").build()))
+							post("/api").headers(headers).content(new Gson().toJson(Item.builder().name("item 2").build()))
 									.contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON))
 					.andExpect(status().isOk()).andReturn();
 			assertNotNull(result.getResponse());
@@ -94,7 +93,7 @@ public class ItemControllerTest {
 		headers.add("Authorization", "123123123");
 		try {
 			this.mockMvc
-					.perform(post("/").headers(headers).content(new Gson().toJson(getItemToCreate(false)))
+					.perform(post("/api").headers(headers).content(new Gson().toJson(getItemToCreate(false)))
 							.contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON))
 					.andExpect(status().isBadRequest()).andReturn();
 		} catch (Exception e) {
@@ -109,7 +108,7 @@ public class ItemControllerTest {
 		headers.add("Authorization", "123123123");
 		try {
 			MvcResult result = this.mockMvc
-					.perform(put("/id").headers(headers).content(new Gson().toJson(getItemCreated()))
+					.perform(put("/apiid").headers(headers).content(new Gson().toJson(getItemCreated()))
 							.contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON))
 					.andExpect(status().isOk()).andReturn();
 			assertNotNull(result.getResponse());
@@ -125,7 +124,7 @@ public class ItemControllerTest {
 		headers.add("Authorization", "123123123");
 		try {
 			this.mockMvc
-					.perform(put("/id").headers(headers).content(new Gson().toJson(getItemToCreate(false)))
+					.perform(put("/apiid").headers(headers).content(new Gson().toJson(getItemToCreate(false)))
 							.contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON))
 					.andExpect(status().isBadRequest()).andReturn();
 		} catch (Exception e) {
@@ -140,7 +139,7 @@ public class ItemControllerTest {
 		headers.add("Authorization", "123123123");
 		try {
 			this.mockMvc
-					.perform(put("/id2").headers(headers).content(new Gson().toJson(getItemCreated()))
+					.perform(put("/apiid2").headers(headers).content(new Gson().toJson(getItemCreated()))
 							.contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON))
 					.andExpect(status().isBadRequest()).andReturn();
 		} catch (Exception e) {
@@ -155,7 +154,7 @@ public class ItemControllerTest {
 		headers.add("Authorization", "123123123");
 		try {
 			this.mockMvc
-					.perform(put("/id").headers(headers).content(new Gson().toJson(getItemToCreate(false)))
+					.perform(put("/apiid").headers(headers).content(new Gson().toJson(getItemToCreate(false)))
 							.contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON))
 					.andExpect(status().isBadRequest()).andReturn();
 		} catch (Exception e) {
@@ -169,7 +168,7 @@ public class ItemControllerTest {
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("Authorization", "123123123");
 		try {
-			MvcResult result = this.mockMvc.perform(get("/id").headers(headers).contentType(MediaType.APPLICATION_JSON)
+			MvcResult result = this.mockMvc.perform(get("/apiid").headers(headers).contentType(MediaType.APPLICATION_JSON)
 					.accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk()).andReturn();
 			assertNotNull(result.getResponse());
 		} catch (Exception e) {
@@ -183,7 +182,7 @@ public class ItemControllerTest {
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("Authorization", "123123123");
 		try {
-			MvcResult result = this.mockMvc.perform(get("/id2").headers(headers).contentType(MediaType.APPLICATION_JSON)
+			MvcResult result = this.mockMvc.perform(get("/apiid2").headers(headers).contentType(MediaType.APPLICATION_JSON)
 					.accept(MediaType.APPLICATION_JSON)).andExpect(status().isBadRequest()).andReturn();
 			assertNotNull(result.getResponse());
 		} catch (Exception e) {
@@ -197,7 +196,7 @@ public class ItemControllerTest {
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("Authorization", "123123123");
 		try {
-			MvcResult result = this.mockMvc.perform(get("/").headers(headers).contentType(MediaType.APPLICATION_JSON)
+			MvcResult result = this.mockMvc.perform(get("/api").headers(headers).contentType(MediaType.APPLICATION_JSON)
 					.accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk()).andReturn();
 			assertNotNull(result.getResponse());
 		} catch (Exception e) {
@@ -211,7 +210,7 @@ public class ItemControllerTest {
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("Authorization", "123123123");
 		try {
-			MvcResult result = this.mockMvc.perform(delete("/id").headers(headers)
+			MvcResult result = this.mockMvc.perform(delete("/apiid").headers(headers)
 					.contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON))
 					.andExpect(status().isOk()).andReturn();
 			assertNotNull(result.getResponse());
@@ -226,7 +225,7 @@ public class ItemControllerTest {
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("Authorization", "123123123");
 		try {
-			MvcResult result = this.mockMvc.perform(delete("/id2").headers(headers)
+			MvcResult result = this.mockMvc.perform(delete("/apiid2").headers(headers)
 					.contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON))
 					.andExpect(status().isBadRequest()).andReturn();
 			assertNotNull(result.getResponse());
