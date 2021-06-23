@@ -9,6 +9,7 @@ pipeline {
 		dockerHome = tool 'myDocker'
 		mavenHome = tool 'myMaven'
 		PATH = "$dockerHome/bin:$mavenHome/bin:$PATH"
+		registry= "527222548725.dkr.ecr.us-east-2.amazonaws.com/crud-service:$env.BUILD_TAG"
 	}
 
 	stages {
@@ -51,9 +52,9 @@ pipeline {
 
 		stage('Build Docker Image') {
 			steps {
-				//"docker build -t thiagogregorio/crud-service:$env.BUILD_TAG"
+				//"docker build -t crud-service:$env.BUILD_TAG"
 				script {
-					dockerImage = docker.build("thiagogregorio/crud-service:${env.BUILD_TAG}")
+					dockerImage = docker.build registry
 				}
 
 			}
@@ -62,7 +63,12 @@ pipeline {
 		stage('Push Docker Image') {
 			steps {
 				script {
-					docker.withRegistry('', 'dockerhub') {
+//					docker.withRegistry('', 'dockerhub') {
+//						dockerImage.push();
+//						dockerImage.push('latest');
+//					}
+
+					docker.withRegistry('https://527222548725.dkr.ecr.us-east-2.amazonaws.com', 'ecr:us-east-2:aws_credentials') {
 						dockerImage.push();
 						dockerImage.push('latest');
 					}
