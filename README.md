@@ -44,10 +44,15 @@ sudo systemctl start jenkins
 <br>
 sudo systemctl status jenkins
 
-5 - Adicione no Jenkins os plugins de Docker e Docker pipeline acessando Gerenciar Jenkins, Gerenciar Plugins, Disponíveis
+5 - Adicione no Jenkins os plugins de Docker, Docker pipeline e Amazon ECR acessando Gerenciar Jenkins, Gerenciar Plugins, Disponíveis
 
-6 - Configure as credenciais globais em Gerenciar Jenkins, Manage Credentials, clique em Jenkins, Global Credentials, e adicione uma nova credencial de nome dockerhub, com seu usuário e senha do docker hub
+6 - Configure as credenciais globais em Gerenciar Jenkins, Manage Credentials, clique em Jenkins, Global Credentials, e adicione uma nova credencial de nome dockerhub*, com seu usuário e senha do docker hub
 
-7 - Acesse Global Tool Configuration, clique em maven, adicione uma configuração auto instalada myMaven. faça o mesmo procedimento para Docker, com usuário myDocker
+7 - Caso utilize o ECR da Amazon, crie uma variável global com uma chave e um secret criados no menu IAM de nome aws_credentials*, clicando em um usuário válido, aba credenciais de segurança, opção credenciais de acesso.
 
-8 - Crie uma nova pipeline, apontando em General, Pipeline from SCM, SCM Git, apontando para este repositório
+8 - Acesse Global Tool Configuration, clique em maven, adicione uma configuração auto instalada myMaven. faça o mesmo procedimento para Docker, com usuário myDocker
+
+9 - Crie uma nova pipeline, apontando em General, Pipeline from SCM, SCM Git, apontando para este repositório
+
+
+*Os nomes não precisam ser necessariamente esses. Você pode escolher o nome que quiser e posteriormente ajustar no Jenkinsfile, que foi comitado com esses nomes.
