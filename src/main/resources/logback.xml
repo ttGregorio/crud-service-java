@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<!-- <?xml version="1.0" encoding="utf-8" ?>
 <configuration>
 	<include
 		resource="org/springframework/boot/logging/logback/defaults.xml" />
@@ -13,4 +13,4 @@
 		<appender-ref ref="CONSOLE" />
 		<appender-ref ref="stash" />
 	</root>
-</configuration>
+</configuration>-->
