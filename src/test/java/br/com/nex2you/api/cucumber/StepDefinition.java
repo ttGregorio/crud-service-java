@@ -93,6 +93,7 @@ public class StepDefinition {
 
 	@Then("^Deve retornar o status (\\d+) na requisicao$")
 	public void deve_retornar_o_status_na_requisicao(int status) throws Exception {
+		System.out.println(response.toString());
 		switch (status) {
 		case HttpStatus.SC_OK:
 			assertEquals(HttpStatus.SC_OK, response.getStatusCodeValue());
