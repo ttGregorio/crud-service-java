@@ -41,21 +41,28 @@ public class ItemController {
 	@PostMapping
 	public ResponseEntity<Response<Item>> create(HttpServletRequest request, @RequestBody Item item,
 			BindingResult result) {
-		logger.info("[{}][create][request: {}][item: {}]", this.getClass().getName(), request.toString(),
-				item.toString());
 		Response<Item> response = new Response<>();
-		validateCreateItem(item, result);
-		item.setActive(true);
-		if (result.hasErrors()) {
+		try {
+			logger.info("[{}][create][request: {}][item: {}]", this.getClass().getName(), request.toString(),
+					item.toString());
+			validateCreateItem(item, result);
+			item.setActive(true);
+			if (result.hasErrors()) {
+				result.getAllErrors().forEach(error -> response.getErrors().add(error.getDefaultMessage()));
+				return ResponseEntity.badRequest().body(response);
+			}
+
+			Item partnerPersisted = (Item) itemService.save(item);
+			response.setData(partnerPersisted);
+			logger.info("[{}][create][response: {}]", this.getClass().getName(), response.toString());
+
+			return ResponseEntity.ok(response);
+		} catch (Exception e) {
+			e.printStackTrace();
+			response.getErrors().add(e.getMessage());
 			result.getAllErrors().forEach(error -> response.getErrors().add(error.getDefaultMessage()));
-			return ResponseEntity.badRequest().body(response);
+			return ResponseEntity.ok(response);
 		}
-
-		Item partnerPersisted = (Item) itemService.save(item);
-		response.setData(partnerPersisted);
-		logger.info("[{}][create][response: {}]", this.getClass().getName(), response.toString());
-
-		return ResponseEntity.ok(response);
 	}
 
 	@ApiOperation(value = "Atualização de itens")
